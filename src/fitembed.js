@@ -24,14 +24,14 @@
 
         this.embed      = document.querySelectorAll(options.embed);
         this.intrinsic  = options.intrinsic  || true;
-      	this.baseWidth  = options.baseWidth  || 16;
-      	this.baseHeight = options.baseHeight || 9;
+        this.baseWidth  = options.baseWidth  || 16;
+        this.baseHeight = options.baseHeight || 9;
 
         this.fit();
     };
 
     FitEmbed.prototype = {
-    	wrap: function (toWrap, wrapper) {
+        wrap: function (toWrap, wrapper) {
             wrapper = wrapper || document.createElement('div');
             if (toWrap.nextSibling) {
                 toWrap.parentNode.insertBefore(wrapper, toWrap.nextSibling);
@@ -40,36 +40,36 @@
             }
             return wrapper.appendChild(toWrap);
         },
-    	fit: function () {
-    		var hRatio, width, height, mediaWrapper;
+        fit: function () {
+            var hRatio, width, height, mediaWrapper;
 
-    		mediaWrapper                = document.createElement('div');
-			mediaWrapper.className      = 'media-wrapper';
-			mediaWrapper.style.position = 'relative';
-			mediaWrapper.style.width    = '100%';
-			mediaWrapper.style.height   = '0';
+            mediaWrapper                = document.createElement('div');
+            mediaWrapper.className      = 'media-wrapper';
+            mediaWrapper.style.position = 'relative';
+            mediaWrapper.style.width    = '100%';
+            mediaWrapper.style.height   = '0';
 
-    		Array.prototype.forEach.call(this.embed, function (embed) {
-    			width  = embed.getAttribute('width');
-    			height = embed.getAttribute('height');
-    			
-    			if (this.intrinsic === true && width !== '' && height !== '') {
-    				hRatio = (height / width) * 100;
-    			} else {
-    				hRatio = (this.baseHeight / this.baseWidth) * 100;
-    			}
+            Array.prototype.forEach.call(this.embed, function (embed) {
+                width  = embed.getAttribute('width');
+                height = embed.getAttribute('height');
+                
+                if (this.intrinsic === true && width !== '' && height !== '') {
+                    hRatio = (height / width) * 100;
+                } else {
+                    hRatio = (this.baseHeight / this.baseWidth) * 100;
+                }
 
-    			mediaWrapper.style.padding = hRatio + '% 0 0 0';
+                mediaWrapper.style.padding = hRatio + '% 0 0 0';
 
-    			embed.style.position = 'absolute';
-    			embed.style.width    = '100%';
-    			embed.style.height   = '100%';
-    			embed.style.top      = '0';
-    			embed.style.left     = '0';
+                embed.style.position = 'absolute';
+                embed.style.width    = '100%';
+                embed.style.height   = '100%';
+                embed.style.top      = '0';
+                embed.style.left     = '0';
 
-    			this.wrap(embed, mediaWrapper);
-    		}.bind(this));
-    	}
+                this.wrap(embed, mediaWrapper);
+            }.bind(this));
+        }
     };
 
     return FitEmbed;
