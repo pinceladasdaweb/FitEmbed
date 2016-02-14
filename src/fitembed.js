@@ -17,7 +17,7 @@
             return new FitEmbed(options);
         }
 
-        if (!options.embed) {
+        if (!options || !options.embed) {
             console.log('%c Don\'t initialize the plugin without setting an embed', 'background: red; color: white');
             return;
         }
